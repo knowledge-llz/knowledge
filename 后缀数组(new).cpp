@@ -1,7 +1,4 @@
 /*************************************************************************
-	> File Name: 1.cpp
-	> Author: Knowledge_llz
-	> Mail: 925538513@qq.com 
 	> https://www.luogu.com.cn/problem/P3809
 	> Created Time: 2022/4/3 22:09:18
  ************************************************************************/
@@ -31,6 +28,17 @@ void build_sa(){
 			x[sa[i]] = (y[sa[i]] == y[sa[i - 1]] && y[sa[i] + k] == y[sa[i - 1] + k]) ? num : ++num;
 		if(num == n) break;
 		m = num;
+	}
+}
+int rk[maxx], height[maxx], k = 0;
+void get_height(){
+	for(int i = 1; i <= n; ++i) rk[sa[i]] = i;
+	for(int i = 1; i <= n; ++i){
+		if(rk[i] == 1) continue;
+		if(k) --k;
+		int j = sa[rk[i] - 1];
+		while(i + k <= n && j + k <= n && s[i + k] == s[j + k]) ++k;
+		height[rk[i]] = k;
 	}
 }
 int main(){
